@@ -1,0 +1,143 @@
+<html lang=""en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>login</title>
+    <style>
+        body{ font-family: :Arial, Helvetica, sans-serif;padding: 20px;}
+        .login-box{ max-width:300px;margin:auto;border: 1px solid#ccc;padding:20px;}
+        input{width:100%;padding:8px;margin: 8px 0;}
+        button{width:100%;padding: 8px; cursor: pointer;}
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h3>login</h3>
+        <input type="email" id="email" placeholder="email" />
+        <input type="password" id="password" placeholder="password" />
+        <button onclick="login()">login</button>
+    </div>
+    <script>
+        function login(){
+            const email=document.getElementById("email").value;
+            const password=document.getElementById("password").value;
+
+            if(email=="admin@gmail.com" && password=="admin1234"){
+                alter("login success");
+                window.location.href="admin.html";
+            }else { 
+                alter("weong email or password");
+            }
+        }
+    </script>
+</body>
+</html>
+
+<!--admin.index-->
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title> admin page</title>
+        <style>
+            body { font-family: Arial, Helvetica, sans-serif; margin:0; display:flex; }
+            .sidebar { width: 250px;background: #f4f4f4; padding:15px; height:100vh;overflow: -y:auto;}
+            .navbar { position: fixed;top:0; left: 250px;right:0; background: #eaeaea;padding: 10px; display:flex; justify-content: space-between;}
+            .main { margin: top 60%; margin-left:250px; padding: 20px; display: flex; flex-wrap:wrap; gap: 15px;}
+            input, select, button {width:100%; padding: 7px; margin:6px 0; }
+            .card {width:30%;border: 1px solid #ccc; padding: 10px;}
+            img{ width:100%; height: 120px; object-fit: cover;}
+            .btn { margin-top: 5px; width:100%; padding: 6px; cursor: pointer;}
+        </style>
+    </head>
+    <body>
+        <div class=""sidebar">
+            <h3>register vehicle</h3>
+            <input type=""text" id="regNo" placeholder="vehicle Reg No" required>
+            <select id="category">
+                <option value="">select category</option>
+                <option value="Auto">Auto</option>
+                <option value="car">car</option>
+                <option value="truck">truck</option>
+                <option value="bus">bus</option>
+                
+            </select>
+            <input type="text" id="driver" placeholder="Driver Nmae" required>
+            <select id="Availablity">
+                <option value="Available">Available</option>
+                <option value="Unavailable">Unavailable</option>
+
+            </select>
+            <button onclick="addFleet()">Add Fleet</button>       
+        </div>
+        <div class="navbar">
+            <h3>Admin Dashbord</h3>
+            <select id="filterCategory" onchange="renderFleet()">
+                <option value="All">all</option>
+                <option value="Auto">auto</option>
+                <option value="car">car</option>
+                <option value="truck">truck</option>
+                <option value="bus">bus</option>
+            </select>
+        </div>
+        <div class="main" id="fleetContainer"></div>
+        <script>
+            let fleet=[];
+            const imgUrl="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/5e80fcb6-3f8e-480c-945b-30a5359eb40e/JNmYjkVr3WOjsrbu.png";
+
+            function addFleet() {
+                const reg =regNo.value.trim();
+                const cat=category.value;
+                const avail=availability.value;
+
+                if(!reg || !cat || !drv) {
+                    alter("all feilds are required");
+                
+                }
+                fleet.push({ reg, cat,drv,avail});
+
+                regNo.value="";
+                category.value="";
+                availability.value="Available";
+
+                renderFleet();
+            }
+
+            function renderFleet() {
+                const filter =document.getElementById("filterCategory").value;
+                const container =document.getElementById("fleetContainer");
+
+                fleet
+                .filter(v=> filter=="all"||v.cat== filter)
+                .forEach((v, index) => {
+                    const card=document.createElement("div");
+                    card.className="card";
+
+                    card.innerHTML=
+                    <img src="${imgUrl"} />
+                    <p><b>Reg No:</b><${v.reg}/p>
+                    <p><b>category:</b><${v.cat}/p>
+                    <p><b>drv:</b><${v.drv}/p>
+                    <p><b>drv:</b><${v.drv}/p>
+                        <p><b>drv:</b><${v.drv}/p>;
+                 
+                            
+                container.appendChild(card);
+                });
+
+            }
+            functionupdateDriver(i){
+                const name=prompt("enter new drivwr name");
+            if(!name) {
+                alter("driver name cannot be emoty");
+                return;
+            } 
+        fleet[i].drv=name;
+        renderFleet();
+           }
+           function changeAvailblity(i){
+            fleet[i].avail==
+           }
+        </script>
+    </body>
+</html>
