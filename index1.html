@@ -119,7 +119,8 @@
                     <p><b>category:</b><${v.cat}/p>
                     <p><b>drv:</b><${v.drv}/p>
                     <p><b>drv:</b><${v.drv}/p>
-                        <p><b>drv:</b><${v.drv}/p>;
+                    <p><b>drv:</b><${v.drv}/p>;
+                    
                  
                             
                 container.appendChild(card);
@@ -136,8 +137,16 @@
         renderFleet();
            }
            function changeAvailblity(i){
-            fleet[i].avail==
+            fleet[i].avail==="Available" ? "Unavailable" : "Available" : "Unavailable";
+            renderFleet();
            }
+           function deleteVehicle(i) {
+            if (conform("are u sure u wanna delete this vehicle?")) {
+                fleet.splice(i, 1);
+                renderFleet();
+            }
+           }
+        }
         </script>
     </body>
 </html>
